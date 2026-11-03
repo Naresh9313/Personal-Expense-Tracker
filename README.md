@@ -120,8 +120,17 @@ npm install
 npm run dev
 ```
 
+
 ## API Endpoints
 
+
+#Swagger Documentation
+
+```Swagger
+http://localhost:10001/api-docs/    (Search In chorme Documentation) 
+```
+
+#Postman (APIs)
 ### Categories
 
   Method   Endpoint                                 Description
@@ -169,6 +178,9 @@ Example expense body:
   "notes": "Weekly groceries"
 }
 ```
+
+
+
 
 
 
