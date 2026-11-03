@@ -7,6 +7,9 @@ import cors from "cors";
 import pool from "./database/db.ts";
 import categoryRouter from "./app/routes/category.routes.ts";
 import expenseRouter from "./app/routes/expense.routes.ts";
+import swaggerUi from "swagger-ui-express";
+import { setupSwagger } from "./src/config/swagger.ts";
+
 
 
 const app = express();
@@ -18,10 +21,9 @@ app.use(
 );
 
 app.use(express.json());
-app.use(express.json());
-
+setupSwagger(app);
 app.get("/", (req, res) => {
-  res.send("Hello");
+  res.send("Hello Naresh Prajapti!");
 });
 
 app.use("/api/category", categoryRouter);
