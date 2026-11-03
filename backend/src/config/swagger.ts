@@ -2,6 +2,7 @@
 import swaggerJsDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import type { Express } from "express";
+import expressBasicAuth from "express-basic-auth";
 
 const swaggerOptions: swaggerJsDoc.Options = {
   definition: {
@@ -419,8 +420,19 @@ const swaggerOptions: swaggerJsDoc.Options = {
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
 export const setupSwagger = (app: Express): void => {
+  const swaggerAuth = expressBasicAuth({
+    users: {
+      [process.env.SWAGGER_USERNAME || "admin"]:
+        process.env.SWAGGER_PASSWORD || "change-me",
+    },
+
+    challenge: true,
+    realm: "Swagger Documentation",
+  });
+
   app.use(
     "/api-docs",
+    swaggerAuth,
     swaggerUi.serve,
     swaggerUi.setup(swaggerDocs)
   );

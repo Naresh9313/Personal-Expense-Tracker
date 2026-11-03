@@ -9,6 +9,7 @@ import categoryRouter from "./app/routes/category.routes.ts";
 import expenseRouter from "./app/routes/expense.routes.ts";
 import swaggerUi from "swagger-ui-express";
 import { setupSwagger } from "./src/config/swagger.ts";
+import colors from "colors"
 
 
 
@@ -33,12 +34,12 @@ app.use("/api/expense", expenseRouter);
 async function startServer() {
   try {
     await pool.query("SELECT NOW()");
-    console.log("Database connected successfully!");
+    console.log("Database connected successfully!".bgGreen.yellow);
 
-    const PORT = process.env.PORT || 5000;
+    app.listen(process.env.PORT, () => {
+      console.log(`Server Running On http://localhost:${process.env.PORT}`.bgCyan.red);
+      console.log("Swagger: http://localhost:10001/api-docs".bgMagenta.white);
 
-    app.listen(PORT, () => {
-      console.log(`Server Running On http://localhost:${PORT}`);
     });
   } catch (error) {
     console.error("Database connection failed:", error);
