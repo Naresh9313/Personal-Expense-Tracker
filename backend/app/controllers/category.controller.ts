@@ -7,20 +7,28 @@ import { categories, expenses } from "../../database/schema.ts";
 import {eq } from "drizzle-orm";
 import type { Category } from "../types/category.types.ts";
 
-export const createCategory = async (req: Request,res: Response): Promise<Response> => {
-  try {
-    const { name }: Category = req.body;
 
+export const createCategory = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  try {
+    const { name } = req.body;
+
+    // Validation
     if (!name) {
       return res.status(400).json({
         message: "Category name is required",
       });
     }
 
+    const categoryName = name.trim();
+
+    // Insert Category
     const [newCategory] = await db
       .insert(categories)
       .values({
-        name: name.trim(),
+        name: categoryName,
       })
       .returning();
 
@@ -28,10 +36,20 @@ export const createCategory = async (req: Request,res: Response): Promise<Respon
       message: "Category created successfully",
       data: newCategory,
     });
-  } catch (error) {
-    console.error("Add Categories Error:", error);
+  } catch (error: any) {
+    console.error("Add Category Error:", error);
+    console.error("Error Cause:", error.cause);
+
+    // Duplicate category
+    if (error.code === "23505" || error.cause?.code === "23505") {
+      return res.status(409).json({
+        message: "Category already exists",
+      });
+    }
+
     return res.status(500).json({
       message: "Internal server error",
+      error: error.message,
     });
   }
 };

@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
 import { Plus, Pencil, Trash2, Tags, X } from "lucide-react";
+import toast from "react-hot-toast";
 import api from "../services/api";
 import type { Category } from "../types";
 
@@ -10,8 +11,6 @@ export default function Categories() {
   const [name, setName] = useState("");
   const [editId, setEditId] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
 
   const load = async () => {
     try {
@@ -19,7 +18,7 @@ export default function Categories() {
       setItems(res.data.data || []);
     } catch (err: any) {
       console.log("Category GET Error:", err.response?.data);
-      setError("Unable to load categories. Please check backend.");
+      toast.error("Unable to load categories.");
     } finally {
       setLoading(false);
     }
@@ -29,14 +28,12 @@ export default function Categories() {
     void load();
   }, []);
 
+  // Add / Update Category
   const submit = async (e: FormEvent) => {
     e.preventDefault();
 
-    setError("");
-    setSuccess("");
-
     if (!name.trim()) {
-      setError("Category name is required.");
+      toast.error("Category name is required.");
       return;
     }
 
@@ -44,18 +41,16 @@ export default function Categories() {
       if (editId !== null) {
         await api.put(
           `/category/updateCategory?id=${editId}`,
-          {
-            name: name.trim(),
-          }
+          { name: name.trim() }
         );
 
-        setSuccess("Category updated successfully.");
+        toast.success("Category updated successfully.");
       } else {
         await api.post("/category/addCategory", {
           name: name.trim(),
         });
 
-        setSuccess("Category created successfully.");
+        toast.success("Category created successfully.");
       }
 
       setName("");
@@ -65,27 +60,26 @@ export default function Categories() {
     } catch (err: any) {
       console.log("Category Save Error:", err.response?.data);
 
-      setError(
+      toast.error(
         err.response?.data?.message ||
-        "Could not save category."
+          "Could not save category."
       );
     }
   };
 
+  // Edit Category
   const edit = (item: Category) => {
     setEditId(item.id);
     setName(item.name);
-    setSuccess("");
-    setError("");
   };
 
+  // Cancel Edit
   const cancelEdit = () => {
     setEditId(null);
     setName("");
-    setError("");
-    setSuccess("");
   };
 
+  // Delete Category
   const remove = async (id: number) => {
     if (
       !confirm(
@@ -95,23 +89,20 @@ export default function Categories() {
       return;
     }
 
-    setError("");
-    setSuccess("");
-
     try {
       await api.delete(
         `/category/deleteCategory?id=${id}`
       );
 
-      setSuccess("Category deleted successfully.");
+      toast.success("Category deleted successfully.");
 
       await load();
     } catch (err: any) {
       console.log("Category Delete Error:", err.response?.data);
 
-      setError(
+      toast.error(
         err.response?.data?.message ||
-        "Could not delete category."
+          "Could not delete category."
       );
     }
   };
@@ -132,12 +123,6 @@ export default function Categories() {
           {items.length} categories
         </div>
       </div>
-
-      {error && <div className="alert">{error}</div>}
-
-      {success && (
-        <div className="success-alert">{success}</div>
-      )}
 
       <div className="content-grid">
         {/* Category Form */}
@@ -160,8 +145,8 @@ export default function Categories() {
             {editId !== null && (
               <button
                 className="icon-button"
-                onClick={cancelEdit}
                 type="button"
+                onClick={cancelEdit}
               >
                 <X size={17} />
               </button>
@@ -234,6 +219,7 @@ export default function Categories() {
 
                   <div className="category-name">
                     <b>{item.name}</b>
+
                     <small>
                       Category #{item.id}
                     </small>
