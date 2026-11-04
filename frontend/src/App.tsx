@@ -1,13 +1,6 @@
 import { useEffect, useState } from "react";
 import { NavLink, Route, Routes, useLocation } from "react-router-dom";
-import {
-  LayoutDashboard,
-  Tags,
-  ReceiptText,
-  Wallet,
-  Menu,
-  X,
-} from "lucide-react";
+import {LayoutDashboard,Tags,ReceiptText,Wallet,Menu,X} from "lucide-react";
 import { Toaster } from "react-hot-toast";
 
 import Dashboard from "./pages/Dashboard";
@@ -30,7 +23,6 @@ export default function App() {
 
   return (
     <div className="app-shell">
-      {/* Toast Notifications */}
       <Toaster
         position="top-right"
         toastOptions={{
