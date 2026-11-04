@@ -10,7 +10,12 @@ import { setupSwagger } from "./src/config/swagger.js";
 import colors from "colors";
 const app = express();
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: [
+        "http://localhost:5173",
+        "https://personal-expense-tracker-5648.vercel.app",
+    ],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
 }));
 app.use(express.json());
 setupSwagger(app);
