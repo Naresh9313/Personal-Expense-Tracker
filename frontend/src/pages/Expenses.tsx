@@ -1,15 +1,7 @@
 
 import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
-import {
-  Plus,
-  Pencil,
-  Trash2,
-  Search,
-  ReceiptText,
-  X,
-  SlidersHorizontal,
-} from "lucide-react";
+import {Plus,Pencil,Trash2,Search,ReceiptText,X,SlidersHorizontal} from "lucide-react";
 
 import api from "../services/api";
 import type { Category, Expense } from "../types";
@@ -45,7 +37,6 @@ export default function Expenses() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  // Load Categories
   const loadCategories = async () => {
     try {
       const res = await api.get("/category/getCategory");
@@ -58,7 +49,6 @@ export default function Expenses() {
     }
   };
 
-  // Load Expenses
   const load = async () => {
     setLoading(true);
 
@@ -123,7 +113,6 @@ export default function Expenses() {
     }));
   };
 
-  // Add / Update Expense
   const submit = async (e: FormEvent) => {
     e.preventDefault();
 
@@ -184,7 +173,6 @@ export default function Expenses() {
     }
   };
 
-  // Edit Expense
   const edit = (item: Expense) => {
     setEditId(item.id);
 
@@ -205,7 +193,6 @@ export default function Expenses() {
     });
   };
 
-  // Cancel Edit
   const cancelEdit = () => {
     setEditId(null);
     setForm(initial);
@@ -213,7 +200,6 @@ export default function Expenses() {
     setSuccess("");
   };
 
-  // Delete Expense
   const remove = async (id: number) => {
     if (!confirm("Delete this expense?")) {
       return;
@@ -240,7 +226,6 @@ export default function Expenses() {
     }
   };
 
-  // Reset Filters
   const resetFilters = () => {
     setSearch("");
     setCategoryFilter("");
@@ -400,7 +385,6 @@ export default function Expenses() {
         </form>
       </article>
 
-      {/* Expenses Table */}
       <article className="panel table-panel">
         <div className="panel-heading">
           <div>
@@ -417,7 +401,6 @@ export default function Expenses() {
           </span>
         </div>
 
-        {/* Filters */}
         <div className="filters">
           <label className="search-box">
             <Search size={17} />

@@ -28,7 +28,6 @@ export default function Categories() {
     void load();
   }, []);
 
-  // Add / Update Category
   const submit = async (e: FormEvent) => {
     e.preventDefault();
 
@@ -67,7 +66,6 @@ export default function Categories() {
     }
   };
 
-  // Edit Category
   const edit = (item: Category) => {
     setEditId(item.id);
     setName(item.name);
@@ -79,7 +77,6 @@ export default function Categories() {
     setName("");
   };
 
-  // Delete Category
   const remove = async (id: number) => {
     if (
       !confirm(
