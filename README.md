@@ -1,6 +1,5 @@
 # Personal Expense Tracker
 
-
 ## Tech Stack
 
 -   **Frontend:** React, TypeScript, Vite, Axios, Lucide React
@@ -70,8 +69,9 @@ DATABASE_URL=your_neon_postgresql_connection_string
 ``` env
 VITE_API_URL=http://localhost:10001/api
 ```
-
-
+#Vercel Live
+```https://personal-expense-tracker-5648.vercel.app/expenses
+```
 ## Database Setup
 1.  Create a PostgreSQL database in Neon.
 2.  Copy its connection string into `backend/.env` as `DATABASE_URL`.
@@ -132,13 +132,13 @@ http://localhost:10001/api-docs/    (Search In chorme Documentation)
 
 #Postman (APIs)
 ### Categories
-
-  Method   Endpoint                                 Description
-  -------- ---------------------------------------- -----------------
-  GET      `/api/category/getCategory`              Get categories
-  POST     `/api/category/addCategory`              Create category
-  PUT      `/api/category/updateCategory?id={id}`   Update category
-  DELETE   `/api/category/deleteCategory?id={id}`   Delete category
+ ------------------------------------------------------------------------------------------------
+  Method                  Endpoint                                         Description
+  ----------------------- ------------------------------------------------ -----------------------
+  GET                     `/api/category/getCategory`              Get categories
+  POST                    `/api/category/addCategory`              Create category
+  PUT                     `/api/category/updateCategory?id={id}`   Update category
+  DELETE                  `/api/category/deleteCategory?id={id}`   Delete category
 
 Example request body:
 
