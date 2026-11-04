@@ -38,9 +38,10 @@ export default function Categories() {
 
     try {
       if (editId !== null) {
-        await api.put(
-          `/category/updateCategory?id=${editId}`,
-          { name: name.trim() }
+        await api.put(`/category/updateCategory?id=${editId}`,
+          { 
+            name: name.trim()
+           }
         );
 
         toast.success("Category updated successfully.");
@@ -71,7 +72,6 @@ export default function Categories() {
     setName(item.name);
   };
 
-  // Cancel Edit
   const cancelEdit = () => {
     setEditId(null);
     setName("");
