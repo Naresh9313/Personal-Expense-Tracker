@@ -288,7 +288,79 @@ a { color: inherit; }
 .category-name { flex: 1; min-width: 0; }
 .category-name b { display: block; font-size: 12px; color: #41435a; overflow-wrap: anywhere; }
 .category-name small { display: block; margin-top: 4px; color: #a0a3b5; font-size: 10px; }
-.row-actions { display: flex; align-items: center; gap: 6px; }
+
+/* Category Action Buttons */
+
+.row-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.category-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Edit Button */
+
+.edit-action {
+  color: #4f46e5;
+  background: #eef2ff;
+  border-color: #c7d2fe;
+}
+
+.edit-action:hover {
+  color: #ffffff;
+  background: #4f46e5;
+  border-color: #4f46e5;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(79, 70, 229, 0.2);
+}
+
+/* Delete Button */
+
+.delete-action {
+  color: #dc2626;
+  background: #fef2f2;
+  border-color: #fecaca;
+}
+
+.delete-action:hover {
+  color: #ffffff;
+  background: #dc2626;
+  border-color: #dc2626;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(220, 38, 38, 0.2);
+}
+
+/* Click Effect */
+
+.category-action:active {
+  transform: scale(0.96);
+}
+
+/* Mobile Responsive */
+
+@media (max-width: 480px) {
+  .category-action {
+    padding: 7px 9px;
+    font-size: 12px;
+  }
+
+  .row-actions {
+    gap: 6px;
+  }
+}
 
 /* -------------------- Expenses Form -------------------- */
 

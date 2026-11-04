@@ -59,9 +59,7 @@ export default function Categories() {
     } catch (err: any) {
       console.error("Category Save Error:", err.response?.data);
 
-      toast.error(
-        err.response?.data?.message || "Could not save category."
-      );
+      toast.error(err.response?.data?.message || "Could not save category.");
     }
   };
 
@@ -77,7 +75,7 @@ export default function Categories() {
 
   const remove = async (id: number) => {
     const confirmed = confirm(
-      "Delete this category? Categories linked to expenses cannot be deleted."
+      "Delete this category? Categories linked to expenses cannot be deleted.",
     );
 
     if (!confirmed) return;
@@ -90,9 +88,7 @@ export default function Categories() {
     } catch (err: any) {
       console.error("Category Delete Error:", err.response?.data);
 
-      toast.error(
-        err.response?.data?.message || "Could not delete category."
-      );
+      toast.error(err.response?.data?.message || "Could not delete category.");
     }
   };
 
@@ -140,7 +136,6 @@ export default function Categories() {
           <form onSubmit={submit} className="form-stack">
             <label>
               Category name
-
               <input
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -186,21 +181,23 @@ export default function Categories() {
 
                   <div className="row-actions">
                     <button
-                      className="icon-button"
+                      className="category-action edit-action"
                       title="Edit category"
                       type="button"
                       onClick={() => edit(item)}
                     >
                       <Pencil size={16} />
+                      <span>Edit</span>
                     </button>
 
                     <button
-                      className="icon-button danger"
+                      className="category-action delete-action"
                       title="Delete category"
                       type="button"
                       onClick={() => void remove(item.id)}
                     >
                       <Trash2 size={16} />
+                      <span>Delete</span>
                     </button>
                   </div>
                 </div>

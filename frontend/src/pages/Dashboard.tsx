@@ -366,10 +366,10 @@ export default function Dashboard() {
     <section>
       <div className="page-heading">
         <div>
-          <p className="eyebrow">YOUR FINANCES AT A GLANCE</p>
+          <p className="eyebrow">Naresh Prajapati</p>
           <h1>Dashboard</h1>
           <p className="subheading">
-            Understand your spending and stay in control.
+            Naresh Prajapati Personal Expense Tracker.
           </p>
         </div>
 

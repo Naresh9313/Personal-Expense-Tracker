@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
 import {
@@ -84,17 +83,14 @@ export default function Expenses() {
       const query = params.toString();
 
       const res = await api.get(
-        `/expense/getExpense${query ? `?${query}` : ""}`
+        `/expense/getExpense${query ? `?${query}` : ""}`,
       );
 
       setItems(res.data.data || []);
     } catch (err: any) {
       console.log("Expense GET Error:", err.response?.data);
 
-      setError(
-        err.response?.data?.message ||
-          "Unable to load expenses."
-      );
+      setError(err.response?.data?.message || "Unable to load expenses.");
     } finally {
       setLoading(false);
     }
@@ -113,10 +109,7 @@ export default function Expenses() {
   }, [search, categoryFilter, startDate, endDate]);
 
   // Form Change
-  const change = (
-    key: keyof typeof initial,
-    value: string
-  ) => {
+  const change = (key: keyof typeof initial, value: string) => {
     setForm((old) => ({
       ...old,
       [key]: value,
@@ -155,17 +148,11 @@ export default function Expenses() {
 
     try {
       if (editId !== null) {
-        await api.put(
-          `/expense/updateExpense?id=${editId}`,
-          payload
-        );
+        await api.put(`/expense/updateExpense?id=${editId}`, payload);
 
         setSuccess("Expense updated successfully.");
       } else {
-        await api.post(
-          "/expense/addExpense",
-          payload
-        );
+        await api.post("/expense/addExpense", payload);
 
         setSuccess("Expense added successfully.");
       }
@@ -177,10 +164,7 @@ export default function Expenses() {
     } catch (err: any) {
       console.log("Expense Save Error:", err.response?.data);
 
-      setError(
-        err.response?.data?.message ||
-          "Could not save expense."
-      );
+      setError(err.response?.data?.message || "Could not save expense.");
     }
   };
 
@@ -223,9 +207,7 @@ export default function Expenses() {
     setSuccess("");
 
     try {
-      await api.delete(
-        `/expense/deleteExpense?id=${id}`
-      );
+      await api.delete(`/expense/deleteExpense?id=${id}`);
 
       setSuccess("Expense deleted successfully.");
 
@@ -233,10 +215,7 @@ export default function Expenses() {
     } catch (err: any) {
       console.log("Expense Delete Error:", err.response?.data);
 
-      setError(
-        err.response?.data?.message ||
-          "Could not delete expense."
-      );
+      setError(err.response?.data?.message || "Could not delete expense.");
     }
   };
 
@@ -252,9 +231,7 @@ export default function Expenses() {
     <section>
       <div className="page-heading">
         <div>
-          <p className="eyebrow">
-            TRACK EVERY TRANSACTION
-          </p>
+          <p className="eyebrow">TRACK EVERY TRANSACTION</p>
 
           <h1>Expenses</h1>
 
@@ -271,21 +248,13 @@ export default function Expenses() {
 
       {error && <div className="alert">{error}</div>}
 
-      {success && (
-        <div className="success-alert">
-          {success}
-        </div>
-      )}
+      {success && <div className="success-alert">{success}</div>}
 
       {/* Expense Form */}
       <article className="panel expense-form-panel">
         <div className="panel-heading">
           <div>
-            <h2>
-              {editId !== null
-                ? "Edit expense"
-                : "Add expense"}
-            </h2>
+            <h2>{editId !== null ? "Edit expense" : "Add expense"}</h2>
 
             <p>
               {editId !== null
@@ -295,28 +264,18 @@ export default function Expenses() {
           </div>
 
           {editId !== null && (
-            <button
-              className="icon-button"
-              type="button"
-              onClick={cancelEdit}
-            >
+            <button className="icon-button" type="button" onClick={cancelEdit}>
               <X size={17} />
             </button>
           )}
         </div>
 
-        <form
-          className="expense-form"
-          onSubmit={submit}
-        >
+        <form className="expense-form" onSubmit={submit}>
           <label>
             Expense title *
-
             <input
               value={form.title}
-              onChange={(e) =>
-                change("title", e.target.value)
-              }
+              onChange={(e) => change("title", e.target.value)}
               placeholder="e.g. Grocery shopping"
               maxLength={150}
             />
@@ -324,37 +283,26 @@ export default function Expenses() {
 
           <label>
             Amount (₹) *
-
             <input
               type="number"
               min="0.01"
               step="0.01"
               value={form.amount}
-              onChange={(e) =>
-                change("amount", e.target.value)
-              }
+              onChange={(e) => change("amount", e.target.value)}
               placeholder="0.00"
             />
           </label>
 
           <label>
             Category *
-
             <select
               value={form.categoryId}
-              onChange={(e) =>
-                change("categoryId", e.target.value)
-              }
+              onChange={(e) => change("categoryId", e.target.value)}
             >
-              <option value="">
-                Choose category
-              </option>
+              <option value="">Choose category</option>
 
               {categories.map((c) => (
-                <option
-                  key={c.id}
-                  value={c.id}
-                >
+                <option key={c.id} value={c.id}>
                   {c.name}
                 </option>
               ))}
@@ -363,38 +311,27 @@ export default function Expenses() {
 
           <label>
             Date *
-
             <input
               type="date"
               value={form.expenseDate}
-              onChange={(e) =>
-                change("expenseDate", e.target.value)
-              }
+              onChange={(e) => change("expenseDate", e.target.value)}
             />
           </label>
 
           <label className="notes-field">
             Notes
-
             <input
               value={form.notes}
-              onChange={(e) =>
-                change("notes", e.target.value)
-              }
+              onChange={(e) => change("notes", e.target.value)}
               placeholder="Optional details"
             />
           </label>
 
           <div className="form-action">
-            <button
-              className="btn-primary"
-              type="submit"
-            >
+            <button className="btn-primary" type="submit">
               <Plus size={17} />
 
-              {editId !== null
-                ? "Save changes"
-                : "Add expense"}
+              {editId !== null ? "Save changes" : "Add expense"}
             </button>
           </div>
         </form>
@@ -406,9 +343,7 @@ export default function Expenses() {
           <div>
             <h2>All transactions</h2>
 
-            <p>
-              Search and filter your expense history
-            </p>
+            <p>Search and filter your expense history</p>
           </div>
 
           <span className="heading-pill">
@@ -424,28 +359,19 @@ export default function Expenses() {
 
             <input
               value={search}
-              onChange={(e) =>
-                setSearch(e.target.value)
-              }
+              onChange={(e) => setSearch(e.target.value)}
               placeholder="Search expense title…"
             />
           </label>
 
           <select
             value={categoryFilter}
-            onChange={(e) =>
-              setCategoryFilter(e.target.value)
-            }
+            onChange={(e) => setCategoryFilter(e.target.value)}
           >
-            <option value="">
-              All categories
-            </option>
+            <option value="">All categories</option>
 
             {categories.map((c) => (
-              <option
-                key={c.id}
-                value={c.id}
-              >
+              <option key={c.id} value={c.id}>
                 {c.name}
               </option>
             ))}
@@ -455,43 +381,30 @@ export default function Expenses() {
             aria-label="Start date"
             type="date"
             value={startDate}
-            onChange={(e) =>
-              setStartDate(e.target.value)
-            }
+            onChange={(e) => setStartDate(e.target.value)}
           />
 
           <input
             aria-label="End date"
             type="date"
             value={endDate}
-            onChange={(e) =>
-              setEndDate(e.target.value)
-            }
+            onChange={(e) => setEndDate(e.target.value)}
           />
 
-          <button
-            className="btn-light"
-            type="button"
-            onClick={resetFilters}
-          >
+          <button className="btn-light" type="button" onClick={resetFilters}>
             Reset
           </button>
         </div>
 
         {loading ? (
-          <div className="loading">
-            Loading expenses…
-          </div>
+          <div className="loading">Loading expenses…</div>
         ) : items.length === 0 ? (
           <div className="empty-state">
             <div className="empty-icon">
               <ReceiptText />
             </div>
 
-            <p>
-              No expenses found. Try another filter
-              or add an expense.
-            </p>
+            <p>No expenses found. Try another filter or add an expense.</p>
           </div>
         ) : (
           <div className="table-wrap">
@@ -518,9 +431,7 @@ export default function Expenses() {
                         <div>
                           <b>{item.title}</b>
 
-                          {item.notes && (
-                            <small>{item.notes}</small>
-                          )}
+                          {item.notes && <small>{item.notes}</small>}
                         </div>
                       </div>
                     </td>
@@ -528,45 +439,35 @@ export default function Expenses() {
                     <td>
                       <span className="category-badge">
                         {item.categoryName ||
-                          categories.find(
-                            (c) =>
-                              c.id === item.categoryId
-                          )?.name ||
+                          categories.find((c) => c.id === item.categoryId)
+                            ?.name ||
                           `#${item.categoryId}`}
                       </span>
                     </td>
 
-                    <td>
-                      {String(item.expenseDate).slice(
-                        0,
-                        10
-                      )}
-                    </td>
+                    <td>{String(item.expenseDate).slice(0, 10)}</td>
 
-                    <td className="amount-cell">
-                      {money(item.amount)}
-                    </td>
+                    <td className="amount-cell">{money(item.amount)}</td>
 
                     <td>
                       <div className="row-actions">
                         <button
-                          className="icon-button"
+                          className="category-action edit-action"
                           title="Edit expense"
                           type="button"
                           onClick={() => edit(item)}
                         >
                           <Pencil size={16} />
+                          <span>Edit</span>
                         </button>
-
                         <button
-                          className="icon-button danger"
+                          className="category-action delete-action"
                           title="Delete expense"
                           type="button"
-                          onClick={() =>
-                            void remove(item.id)
-                          }
+                          onClick={() => void remove(item.id)}
                         >
                           <Trash2 size={16} />
+                          <span>Delete</span>
                         </button>
                       </div>
                     </td>

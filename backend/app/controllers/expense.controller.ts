@@ -81,7 +81,7 @@ export const getExpenses = async (req: Request,res: Response): Promise<Response>
         gte(expenses.expenseDate, String(startDate))
       );
     }
-
+    
     if (endDate) {
       conditions.push(
         lte(expenses.expenseDate, String(endDate))
