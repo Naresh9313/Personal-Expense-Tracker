@@ -1,14 +1,6 @@
 import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
-import {
-  Plus,
-  Pencil,
-  Trash2,
-  Search,
-  ReceiptText,
-  X,
-  SlidersHorizontal,
-} from "lucide-react";
+import {Plus,Pencil,Trash2,Search,ReceiptText,X,SlidersHorizontal} from "lucide-react";
 
 import api from "../services/api";
 import type { Category, Expense } from "../types";
@@ -31,24 +23,19 @@ const initial = {
 export default function Expenses() {
   const [items, setItems] = useState<Expense[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
-
   const [form, setForm] = useState(initial);
   const [editId, setEditId] = useState<number | null>(null);
-
   const [search, setSearch] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  // Load Categories
   const loadCategories = async () => {
     try {
       const res = await api.get("/category/getCategory");
-
       setCategories(res.data.data || []);
     } catch (err: any) {
       console.log("Category Error:", err.response?.data);
@@ -57,7 +44,6 @@ export default function Expenses() {
     }
   };
 
-  // Load Expenses
   const load = async () => {
     setLoading(true);
 
@@ -89,7 +75,6 @@ export default function Expenses() {
       setItems(res.data.data || []);
     } catch (err: any) {
       console.log("Expense GET Error:", err.response?.data);
-
       setError(err.response?.data?.message || "Unable to load expenses.");
     } finally {
       setLoading(false);
@@ -108,7 +93,6 @@ export default function Expenses() {
     return () => clearTimeout(timer);
   }, [search, categoryFilter, startDate, endDate]);
 
-  // Form Change
   const change = (key: keyof typeof initial, value: string) => {
     setForm((old) => ({
       ...old,
@@ -116,7 +100,6 @@ export default function Expenses() {
     }));
   };
 
-  // Add / Update Expense
   const submit = async (e: FormEvent) => {
     e.preventDefault();
 
@@ -168,7 +151,6 @@ export default function Expenses() {
     }
   };
 
-  // Edit Expense
   const edit = (item: Expense) => {
     setEditId(item.id);
 
@@ -189,7 +171,6 @@ export default function Expenses() {
     });
   };
 
-  // Cancel Edit
   const cancelEdit = () => {
     setEditId(null);
     setForm(initial);
@@ -197,7 +178,6 @@ export default function Expenses() {
     setSuccess("");
   };
 
-  // Delete Expense
   const remove = async (id: number) => {
     if (!confirm("Delete this expense?")) {
       return;
