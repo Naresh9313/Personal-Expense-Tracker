@@ -235,7 +235,7 @@ export const getMonthlyExpense = async (req: Request,res: Response): Promise<Res
 
     const startDate = `${month}-01`;
 
-    const nextMonthDate = new Date(year, monthNumber, 1);
+    const nextMonthDate = new Date(year!, monthNumber!, 1);
 
     const nextMonth = `${nextMonthDate.getFullYear()}-${String(
       nextMonthDate.getMonth() + 1
@@ -256,7 +256,7 @@ export const getMonthlyExpense = async (req: Request,res: Response): Promise<Res
     return res.status(200).json({
       message: "Monthly expense fetched successfully",
       month,
-      totalExpense: result.totalExpense || "0",
+      totalExpense: result?.totalExpense || "0",
     });
   } catch (error) {
     console.error("Monthly Expense Error:", error);
