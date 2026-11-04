@@ -59,7 +59,7 @@ export default function App() {
           <div className="brand-mark">
             <Wallet size={21} />
           </div>
-          <span>Spendly</span>
+          <span>Naresh K P</span>
         </div>
 
         <div className="nav-label">WORKSPACE</div>
