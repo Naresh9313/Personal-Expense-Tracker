@@ -11,7 +11,7 @@ export const createExpense = async (req: Request,res: Response): Promise<Respons
 
     if (!title || !amount || !categoryId || !expenseDate) {
       return res.status(400).json({
-        message: "Title, amount, categoryId and expenseDate are required",
+        message: "All Fields are required",
       });
     }
 
@@ -229,7 +229,7 @@ export const deleteExpense = async (req: Request,res: Response): Promise<Respons
 
 export const getMonthlyExpense = async (req: Request,res: Response): Promise<Response> => {
   try {
-    const month = String(req.query.month || new Date().toISOString().slice(0, 7)); // Default to current month if not provided
+    const month = String(req.query.month || new Date().toISOString().slice(0, 7));
 
     const [year, monthNumber] = month.split("-").map(Number);
 

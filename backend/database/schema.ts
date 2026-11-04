@@ -30,7 +30,6 @@ export const expenses = pgTable("expenses",{
   })
 );
 
-// ==================== CATEGORIES RELATIONS ====================
 
 export const categoriesRelations = relations(
   categories,
@@ -39,7 +38,6 @@ export const categoriesRelations = relations(
   })
 );
 
-// ==================== EXPENSES RELATIONS ====================
 
 export const expensesRelations = relations(
   expenses,
