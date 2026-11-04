@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
 import { NavLink, Route, Routes, useLocation } from "react-router-dom";
-import {LayoutDashboard,Tags,ReceiptText,Wallet,Menu,X} from "lucide-react";
+import {
+  LayoutDashboard,
+  Tags,
+  ReceiptText,
+  Wallet,
+  Menu,
+  X,
+} from "lucide-react";
 import { Toaster } from "react-hot-toast";
 
 import Dashboard from "./pages/Dashboard";
@@ -15,7 +22,7 @@ export default function App() {
     setMobileOpen(false);
   }, [location.pathname]);
 
-  const nav = [
+  const navItems = [
     { to: "/", label: "Dashboard", icon: LayoutDashboard },
     { to: "/categories", label: "Categories", icon: Tags },
     { to: "/expenses", label: "Expenses", icon: ReceiptText },
@@ -52,23 +59,23 @@ export default function App() {
           <div className="brand-mark">
             <Wallet size={21} />
           </div>
-          <span></span>
+          <span>Spendly</span>
         </div>
 
         <div className="nav-label">WORKSPACE</div>
 
         <nav>
-          {nav.map((item) => (
+          {navItems.map(({ to, label, icon: Icon }) => (
             <NavLink
-              key={item.to}
-              to={item.to}
-              end={item.to === "/"}
+              key={to}
+              to={to}
+              end={to === "/"}
               className={({ isActive }) =>
                 `nav-link ${isActive ? "active" : ""}`
               }
             >
-              <item.icon size={19} />
-              <span>{item.label}</span>
+              <Icon size={19} />
+              <span>{label}</span>
             </NavLink>
           ))}
         </nav>
@@ -96,7 +103,7 @@ export default function App() {
         <header className="topbar">
           <button
             className="mobile-menu"
-            onClick={() => setMobileOpen(!mobileOpen)}
+            onClick={() => setMobileOpen((prev) => !prev)}
             aria-label="Toggle menu"
           >
             {mobileOpen ? <X /> : <Menu />}
@@ -109,7 +116,7 @@ export default function App() {
                 ? "Dashboard"
                 : location.pathname
                     .slice(1)
-                    .replace(/^./, (c) => c.toUpperCase())}
+                    .replace(/^./, (char) => char.toUpperCase())}
             </b>
           </div>
 
