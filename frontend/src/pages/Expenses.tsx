@@ -219,7 +219,6 @@ export default function Expenses() {
     }
   };
 
-  // Reset Filters
   const resetFilters = () => {
     setSearch("");
     setCategoryFilter("");
@@ -337,7 +336,6 @@ export default function Expenses() {
         </form>
       </article>
 
-      {/* Expenses Table */}
       <article className="panel table-panel">
         <div className="panel-heading">
           <div>
@@ -352,7 +350,6 @@ export default function Expenses() {
           </span>
         </div>
 
-        {/* Filters */}
         <div className="filters">
           <label className="search-box">
             <Search size={17} />
