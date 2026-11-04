@@ -1,0 +1,1 @@
+{"version":3,"file":"drizzle.config.js","sourceRoot":"","sources":["../../../database/drizzle/drizzle.config.ts"],"names":[],"mappings":"AAAA,OAAO,eAAe,CAAC;AACvB,OAAO,EAAE,YAAY,EAAE,MAAM,aAAa,CAAC;AAG3C,eAAe,YAAY,CAAC;IACxB,MAAM,EAAC,sBAAsB;IAC7B,GAAG,EAAC,+BAA+B;IACnC,OAAO,EAAC,YAAY;IACpB,aAAa,EAAE;QACf,GAAG,EAAE,OAAO,CAAC,GAAG,CAAC,YAAa;KACjC;CACA,CAAC,CAAA"}
