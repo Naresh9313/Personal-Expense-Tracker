@@ -228,4 +228,4 @@ The frontend application is deployed on Vercel.
 
 **Live URL:**
 
-https://personal-expense-tracker-5648.vercel.app/expenses
+https://personal-expense-tracker-5648.vercel.app/
