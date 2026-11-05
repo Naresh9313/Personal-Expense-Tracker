@@ -1,6 +1,14 @@
 import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
-import {Plus,Pencil,Trash2,Search,ReceiptText,X,SlidersHorizontal} from "lucide-react";
+import {
+  Plus,
+  Pencil,
+  Trash2,
+  Search,
+  ReceiptText,
+  X,
+  SlidersHorizontal,
+} from "lucide-react";
 
 import api from "../services/api";
 import type { Category, Expense } from "../types";
@@ -397,8 +405,17 @@ export default function Expenses() {
               </thead>
 
               <tbody>
-                {items.map((item) => (
-                  <tr key={item.id}>
+                {/* {items.map((item) => (
+                  <tr key={item.id}> */}
+                {items.map((item, index) => (
+                  <tr
+                    key={item.id}
+                    className={
+                      index % 2 === 0
+                        ? "expense-row-colored"
+                        : "expense-row-empty"
+                    }
+                  >
                     <td>
                       <div className="table-expense">
                         <div className="expense-avatar tint-1">

@@ -171,9 +171,17 @@ export default function Categories() {
           ) : (
             <div className="category-list">
               {items.map((item, index) => (
-                <div className="category-row" key={item.id}>
+                // <div className="category-row" key={item.id}>
+                <div
+                  className={`category-row ${
+                    index % 2 === 0
+                      ? "category-row-colored"
+                      : "category-row-empty"
+                  }`}
+                  key={item.id}
+                >
                   <div className={`category-dot dot-${index % 6}`} />
-
+                 
                   <div className="category-name">
                     <b>{item.name}</b>
                     <small>Category #{item.id}</small>

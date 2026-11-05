@@ -311,7 +311,25 @@ a { color: inherit; }
   transition: all 0.2s ease;
 }
 
-/* Edit Button */
+.dot-empty {
+  background: transparent;
+}
+.category-row-colored {
+  background-color: #f1f4f4;
+}
+
+.category-row-empty {
+  background-color: transparent;
+}
+
+.expense-row-colored {
+  background-color: #f3f0ff;
+}
+
+.expense-row-empty {
+  background-color: transparent;
+}
+
 
 .edit-action {
   color: #4f46e5;

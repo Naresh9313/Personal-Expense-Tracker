@@ -13,10 +13,7 @@ const money = (value: string | number) =>
 const getCurrentMonth = () => {
   const date = new Date();
 
-  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(
-    2,
-    "0"
-  )}`;
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2,"0")}`;
 };
 
 const categoryColors: Record<string, string> = {
@@ -53,7 +50,6 @@ export default function Dashboard() {
       );
 
       setSummary(categoryRes.data.data || []);
-
       const recentExpenses: Expense[] = expenseRes.data.data || [];
 
       setExpenses(
