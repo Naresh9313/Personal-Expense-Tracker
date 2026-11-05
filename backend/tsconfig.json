@@ -12,6 +12,12 @@
     "rewriteRelativeImportExtensions": true,
     "noEmit": false,
 
+    // "paths": {
+    //   "@/*": ["./app/*"],
+    //   "@src/*": ["./src/*"],
+    //   "@database/*": ["./database/*"]
+    // },
+
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,

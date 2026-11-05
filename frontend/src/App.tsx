@@ -1,13 +1,6 @@
 import { useEffect, useState } from "react";
 import { NavLink, Route, Routes, useLocation } from "react-router-dom";
-import {
-  LayoutDashboard,
-  Tags,
-  ReceiptText,
-  Wallet,
-  Menu,
-  X,
-} from "lucide-react";
+import {LayoutDashboard,Tags,ReceiptText,Wallet,Menu,X} from "lucide-react";
 import { Toaster } from "react-hot-toast";
 
 import Dashboard from "./pages/Dashboard";
@@ -122,7 +115,7 @@ export default function App() {
 
           <div className="top-user">
             <div className="avatar">NP</div>
-            <span>Naresh</span>
+            <span>Naresh Prajapati</span>
           </div>
         </header>
 
@@ -135,7 +128,7 @@ export default function App() {
         </div>
 
         <footer className="footer">
-          Spendly <span>•</span> Personal finance, made clear
+          Naresh Prajapati <span>•</span>Personal Expense Tracker
         </footer>
       </main>
     </div>
