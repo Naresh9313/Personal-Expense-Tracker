@@ -4,17 +4,16 @@ import confetti from "canvas-confetti";
 
 export default function Fireworks() {
   useEffect(() => {
-    const handleClick = (event: MouseEvent) => {
-      const x = event.clientX / window.innerWidth;
-      const y = event.clientY / window.innerHeight;
-
+    const fireworks = () => {
       confetti({
-        particleCount: 80,
-        spread: 100,
-        startVelocity: 35,
+        particleCount: 150,
+        spread: 360,
+        startVelocity: 45,
+        gravity: 0.8,
+        ticks: 200,
         origin: {
-          x,
-          y,
+          x: 0.5,
+          y: 0.5,
         },
         colors: [
           "#ff0000",
@@ -28,11 +27,7 @@ export default function Fireworks() {
       });
     };
 
-    window.addEventListener("click", handleClick);
-
-    return () => {
-      window.removeEventListener("click", handleClick);
-    };
+    fireworks();
   }, []);
 
   return null;

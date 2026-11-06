@@ -1,14 +1,6 @@
 import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
-import {
-  Plus,
-  Pencil,
-  Trash2,
-  Search,
-  ReceiptText,
-  X,
-  SlidersHorizontal,
-} from "lucide-react";
+import {Plus,Pencil,Trash2,Search,ReceiptText,X,SlidersHorizontal} from "lucide-react";
 
 import api from "../services/api";
 import type { Category, Expense } from "../types";
